@@ -1,8 +1,6 @@
 @_exported public import Axis
 @_exported public import Scale
 
-/// An elementary coordinate shear: target += factor * source.
-/// Distinct axes make this invertible with determinant one in exact arithmetic.
 public struct Shear<let N: Int, Scalar: BinaryFloatingPoint> {
     public let target: Axis<N>
     public let source: Axis<N>
