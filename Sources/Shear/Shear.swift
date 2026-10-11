@@ -6,12 +6,6 @@ public struct Shear<let N: Int, Scalar: BinaryFloatingPoint> {
     public let source: Axis<N>
     public let factor: Scale<1, Scalar>
 
-    public enum Error: Swift.Error, Equatable, Sendable {
-        case invalidAxis
-        case coincidentAxes
-        case nonfiniteFactor
-    }
-
     public init(target: Axis<N>, source: Axis<N>, factor: Scale<1, Scalar>) throws(Error) {
         guard target.underlying >= 0, target.underlying < N,
               source.underlying >= 0, source.underlying < N else { throw .invalidAxis }
@@ -21,11 +15,12 @@ public struct Shear<let N: Int, Scalar: BinaryFloatingPoint> {
         self.source = source
         self.factor = Scale(factor.value == 0 ? 0 : factor.value)
     }
+}
 
+extension Shear {
     public var inverse: Self {
         Self(validatedTarget: target, source: source, factor: -factor.value)
     }
-
 }
 
 extension Shear: Equatable {}
