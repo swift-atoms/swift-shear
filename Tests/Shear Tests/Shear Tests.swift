@@ -1,6 +1,6 @@
+import Foundation
 import Shear
 import Testing
-import Foundation
 
 @Suite struct `Elementary shear contracts` {
     @Test func `Inverse preserves axes and negates the validated factor`() throws {

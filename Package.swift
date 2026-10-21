@@ -10,27 +10,34 @@ let package = Package(
         .package(url: "https://github.com/swift-atoms/swift-scale.git", branch: "main"),
     ],
     targets: [
-        .target(name: "Shear", dependencies: [
-            .product(name: "Axis", package: "swift-axis"),
-            .product(name: "Scale", package: "swift-scale"),
-        ]),
-        .testTarget(name: "Shear Tests", dependencies: [
-            .target(name: "Shear"),
-            .product(name: "Scale", package: "swift-scale"),
-        ]),
+        .target(
+            name: "Shear",
+            dependencies: [
+                .product(name: "Axis", package: "swift-axis"),
+                .product(name: "Scale", package: "swift-scale"),
+            ]
+        ),
+        .testTarget(
+            name: "Shear Tests",
+            dependencies: [
+                .target(name: "Shear"),
+                .product(name: "Scale", package: "swift-scale"),
+            ]
+        ),
     ],
     swiftLanguageModes: [.v6]
 )
 
 for target in package.targets where ![.system, .binary, .plugin, .macro].contains(target.type) {
-    target.swiftSettings = (target.swiftSettings ?? []) + [
-        .strictMemorySafety(),
-        .enableUpcomingFeature("ExistentialAny"),
-        .enableUpcomingFeature("InternalImportsByDefault"),
-        .enableUpcomingFeature("MemberImportVisibility"),
-        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
-        .enableUpcomingFeature("InferIsolatedConformances"),
-        .enableExperimentalFeature("Lifetimes"),
-        .treatAllWarnings(as: .error),
-    ]
+    target.swiftSettings =
+        (target.swiftSettings ?? []) + [
+            .strictMemorySafety(),
+            .enableUpcomingFeature("ExistentialAny"),
+            .enableUpcomingFeature("InternalImportsByDefault"),
+            .enableUpcomingFeature("MemberImportVisibility"),
+            .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+            .enableUpcomingFeature("InferIsolatedConformances"),
+            .enableExperimentalFeature("Lifetimes"),
+            .treatAllWarnings(as: .error),
+        ]
 }
