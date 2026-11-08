@@ -1,5 +1,5 @@
-@_exported public import Axis
-@_exported public import Scale
+public import Axis
+public import Scale
 
 public struct Shear<let N: Int, Scalar: BinaryFloatingPoint> {
     public let target: Axis<N>
